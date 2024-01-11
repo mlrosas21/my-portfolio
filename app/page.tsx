@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Hero from '@/components/Hero'
 
 export default function Home() {
   return (
-    <main>
-      <h1 className='text-4xl'>Hello World</h1>
+    <main className='py-24'>
+      <Hero/>
     </main>
   )
 }
