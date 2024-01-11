@@ -1,7 +1,9 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { RiMoonFill, RiSunLine } from "react-icons/ri";
 
 type NavBarItem = {
@@ -27,14 +29,28 @@ const NAV_ITEMS: NavBarItem[] = [
 const NavBar = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <header className={`w-full px-4 shadow fixed top-0 z-50 bg-white dark:bg-stone-900`}>
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold py-5">Martín Rosas</h2>
-        <ul className="list-none flex space-x-4">
+    <header
+      className={`w-full px-10 shadow fixed top-0 z-50 bg-white dark:bg-stone-900`}
+    >
+      <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className="flex w-full justify-between">
+          <h2 className="text-2xl font-bold py-5">Martín Rosas</h2>
+          <button className="md:hidden" onClick={() => setOpen(!open)}>
+            {open ? <IoMdClose size={25} /> : <IoMdMenu size={25} />}
+          </button>
+        </div>
+        <div
+          className={`list-none space-y-2 md:space-y-0 md:space-x-4 flex-col md:flex-row pb-4 md:pb-0 md:flex ${
+            open ? "flex" : "hidden"
+          }`}
+        >
           {NAV_ITEMS.map((e, idx) => (
-            <li key={idx}>{e.label}</li>
+            <Link key={idx} href={e.page} className="hover:text-neutral-500">
+              {e.label}
+            </Link>
           ))}
           {currentTheme === "dark" ? (
             <button onClick={() => setTheme("light")}>
@@ -45,7 +61,7 @@ const NavBar = () => {
               <RiMoonFill />
             </button>
           )}
-        </ul>
+        </div>
       </div>
     </header>
   );

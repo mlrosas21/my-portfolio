@@ -1,3 +1,5 @@
+"use client"
+
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
