@@ -14,15 +14,15 @@ type NavBarItem = {
 const NAV_ITEMS: NavBarItem[] = [
   {
     label: "Home",
-    page: "/",
+    page: "#home",
   },
   {
     label: "About",
-    page: "/about",
+    page: "#about",
   },
   {
     label: "Projects",
-    page: "/projects",
+    page: "#projects",
   },
 ];
 
@@ -43,7 +43,7 @@ const NavBar = () => {
           </button>
         </div>
         <div
-          className={`list-none space-y-2 md:space-y-0 md:space-x-4 flex-col md:flex-row pb-4 md:pb-0 md:flex ${
+          className={`space-y-2 md:space-y-0 md:space-x-4 flex-col md:flex-row pb-4 md:pb-0 md:flex items-center ${
             open ? "flex" : "hidden"
           }`}
         >
@@ -53,11 +53,11 @@ const NavBar = () => {
             </Link>
           ))}
           {currentTheme === "dark" ? (
-            <button onClick={() => setTheme("light")}>
+            <button onClick={() => setTheme("light")} className="p-1 rounded text-yellow-400">
               <RiSunLine />
             </button>
           ) : (
-            <button onClick={() => setTheme("dark")}>
+            <button onClick={() => setTheme("dark")} className="p-1 rounded text-stone-600">
               <RiMoonFill />
             </button>
           )}
